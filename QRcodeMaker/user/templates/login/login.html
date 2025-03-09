@@ -1,42 +1,34 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  {% comment %} Наследуем шаблон от base.html для использования общей структуры страницы{% endcomment %}
 
-{% load static %}
+{% load static %}  {% comment %} Загружаем модуль static, чтобы использовать статические файлы (CSS, изображения){% endcomment %}
 
-{% block title %} Login {% endblock %}
-
+{% block title %} Login {% endblock %}  {% comment %} Устанавливаем заголовок страницы как "Login"{% endcomment %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'login/css/styles.css' %}">
-{% endblock  %}
+    <link rel="stylesheet" href="{% static 'login/css/styles.css' %}">  {% comment %} Подключаем стили, используя Django static{% endcomment %}
+{% endblock %}
 
 {% block content %}
-    <div class="main">
-
-        <div class="test">
-            <div class="login-container">
-                <h2>Логін</h2>
-                <form method="post" action="{% url 'login' %}" class = "login-box">
-                    {% csrf_token %}
-                    <p class="input_holder">Ім'я користувача:</p>
-                    <input class="log_input" type="text" name="username" placeholder="Введіть ім'я">
-                    {% comment %} <p class="input_holder">Email користувача:</p>
-                    <input class="log_input" type="email" name="email" placeholder="Введіть email"> {% endcomment %}
-                    <p class="input_holder">Пароль користувача:</p>
-                    <input class="log_input" type="password" name="password" placeholder="Введіть пароль">
-                    {% for er in error %}
-                        <p class="error">{{ er }}</p>
-                    {% endfor %}
-                    <p>Якщо у вас немає аккаунту натисніть <a href="{% url 'reg' %}">тут</a>.</p>
-                    <button class="login_submit" type="submit">Увійти</button>
-                </form>
-            </div>
+<div class="main">  {% comment %} Основной контейнер страницы{% endcomment %}
+    <div class="test">  {% comment %} Контейнер для формы входа{% endcomment %}
+        <div class="login-container">  {% comment %} Внутренний контейнер формы{% endcomment %}
+            <h2>Логін</h2>  {% comment %} Заголовок формы{% endcomment %}
+            <form method="post" action="{% url 'login' %}" class="login-box">  {% comment %} Форма отправляется методом POST на URL 'login'{% endcomment %}
+                {% csrf_token %}  {% comment %} Защита от CSRF-атак (обязательно для форм Django){% endcomment %}
+                <p class="input_holder">Ім'я користувача:</p>  {% comment %} Подпись для поля ввода{% endcomment %}
+                <input class="log_input" type="text" name="username" placeholder="Введіть ім'я" autofocus required>{% comment %} Поле ввода имени пользователя{% endcomment %}
+                <p class="input_holder">Пароль користувача:</p>  {% comment %} Подпись для поля ввода пароля{% endcomment %}
+                <input class="log_input" type="password" name="password" placeholder="Введіть пароль" required>  {% comment %} Поле ввода пароля{% endcomment %}
+                {% for er in error %}  {% comment %} Перебираем список ошибок (передается из views.py){% endcomment %}
+                    <p class="error">{{ er }}</p>  {% comment %} Отображаем каждую ошибку{% endcomment %}
+                {% endfor %}
+                <p>Якщо у вас немає аккаунту натисніть <a href="{% url 'reg' %}">тут</a>.</p>  {% comment %} Ссылка на страницу регистрации{% endcomment %}
+                <button class="login_submit" type="submit">Увійти</button>  {% comment %} Кнопка отправки формы{% endcomment %}
+            </form>
         </div>
-
-        <div class="test-2">
-            <img class="image-qr" src="{% static 'login/images/QRCODE.png' %}" alt="error with qrcode image, line 36">
-        </div>
-        
     </div>
-
-
+    <div class="test-2">  {% comment %} Контейнер для изображения QR-кода{% endcomment %}
+        <img class="image-qr" src="{% static 'login/images/QRCODE.png' %}" alt="error with qrcode image, line 36">  {% comment %} Подключаем изображение из статических файлов{% endcomment %}
+    </div> 
+</div>  {% comment %} Закрываем основной контейнер{% endcomment %}
 {% endblock %}
