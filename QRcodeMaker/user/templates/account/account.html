@@ -1,33 +1,30 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  {% comment %} Наследуем шаблон от base.html, который содержит основную структуру страницы{% endcomment %}
 
-{% load static %}
+{% load static %}  {% comment %} Загружаем static, чтобы использовать статические файлы (CSS, JS, изображения){% endcomment %}
 
-{% block title %} Account {% endblock  %}
+{% block title %} Account {% endblock %}  {% comment %} Устанавливаем заголовок страницы как "Account"{% endcomment %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'account/css/styles.css' %}">
-{% endblock  %}
+    <link rel="stylesheet" href="{% static 'account/css/styles.css' %}">  {% comment %}Подключаем стили, используя Django static{% endcomment %}
+{% endblock %}
 
 {% block content %}
-
-<div class="main">
-    <div class="account-settings">
-        <h2 class="title">Налаштування</h2>
-        <div class="sett">
-            <div class="info">
-                <h3>Ім'я користувача:</h3>
-                <p>{{ user.username }}</p>
-                <h3>Email користувача:</h3>
-                <p>{{ user.email }}</p>
-                <h3>Підписка користувача:</h3>
-                <p>{{ user.licence }}</p>
-                <h3>термін дії поточної передплати:</h3>
-                <p>{{ user.licence_date }}</p>
-            </div>
-
-        </div>
-    </div>
-</div>
-        
-{% endblock  %}
+<div class="main">   {% comment %}Основной контейнер страницы{% endcomment %}
+    <div class="account-settings">  {% comment %}Блок настроек аккаунта{% endcomment %}
+        <h2 class="title">Налаштування</h2>   {% comment %}Заголовок секции{% endcomment %}
+        <div class="sett">  {% comment %}Контейнер для информации о пользователе{% endcomment %}
+            <div class="info">  {% comment %}Внутренний контейнер с данными пользователя{% endcomment %}
+                <h3>Ім'я користувача:</h3>  {% comment %}Подзаголовок{% endcomment %}
+                <p>{{ user.username }}</p>  {% comment %}Отображение имени пользователя{% endcomment %}
+                <h3>Email користувача:</h3>  {% comment %}Подзаголовок{% endcomment %}
+                <p>{{ user.email }}</p>  {% comment %}Отображение email пользователя{% endcomment %}
+                <h3>Підписка користувача:</h3>  {% comment %}Подзаголовок{% endcomment %}
+                <p>{{ user.licence }}</p>  {% comment %}Отображение информации о подписке{% endcomment %}
+                <h3>Термін дії поточної передплати:</h3>  {% comment %}Подзаголовок{% endcomment %}
+                <p>{{ user.licence_date }}</p>  {% comment %}Отображение срока действия подписки{% endcomment %}
+            </div>  {% comment %}Закрытие блока .info{% endcomment %}
+        </div>  {% comment %}Закрытие блока .sett{% endcomment %}
+    </div>  {% comment %}Закрытие блока .account-settings{% endcomment %}
+</div>  {% comment %}Закрытие блока .main{% endcomment %}
+{% endblock %}
 
