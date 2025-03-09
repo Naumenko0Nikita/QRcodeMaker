@@ -1,48 +1,46 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  {% comment %} Наследуем шаблон от base.html, чтобы использовать общую структуру страницы{% endcomment %}
 
-{% load static %}
+{% load static %}  {% comment %} Загружаем модуль static, чтобы работать со статическими файлами (CSS, изображения){% endcomment %}
 
-{% block title %}Registration{% endblock  %}
+{% block title %}Registration{% endblock %}  {% comment %} Устанавливаем заголовок страницы "Registration"{% endcomment %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'registration/css/styles.css' %}">
-{% endblock  %}
+    <link rel="stylesheet" href="{% static 'registration/css/styles.css' %}">  {% comment %} Подключаем стили для страницы регистрации{% endcomment %}
+{% endblock %}
 
 {% block content %}
-    <div class = "main">
-        
-        <div class="test">
-            <div class="registration-container">
-                <h2>Реєстрація</h2>
-                <form method="post" action="{% url 'reg' %}" class="registration-box">
-                    {% csrf_token %}
-                    <p class="input_holder">Ім'я користувача:</p>
-                    <input class = "reg_input" type = "text" name = "username" placeholder = "Введіть ім'я" required>
-                    {% for er in name %}
-                        <p class="error">{{ er }}</p>
+    <div class="main">  {% comment %} Основной контейнер страницы{% endcomment %}
+        <div class="test">  {% comment %} Контейнер для формы регистрации{% endcomment %}
+            <div class="registration-container">  {% comment %} Внутренний контейнер формы{% endcomment %}
+                <h2>Реєстрація</h2>  {% comment %} Заголовок формы{% endcomment %}
+                <form method="post" action="{% url 'reg' %}" class="registration-box">  {% comment %} Форма отправляется методом POST на URL 'reg'{% endcomment %}
+                    {% csrf_token %}  {% comment %} CSRF-токен для защиты формы{% endcomment %}
+                    <p class="input_holder">Ім'я користувача:</p>  {% comment %} Подпись к полю{% endcomment %}
+                    <input class="reg_input" type="text" name="username" placeholder="Введіть ім'я" required>  {% comment %} Поле для имени пользователя{% endcomment %}
+                    {% for er in name %}  {% comment %} Перебираем список ошибок, связанных с именем{% endcomment %}
+                        <p class="error">{{ er }}</p>  {% comment %} Выводим каждую ошибку{% endcomment %}
                     {% endfor %}
-                    <p class="input_holder">Email користувача:</p>
-                    <input class = "reg_input" type = "email" name = "email" placeholder = "Введіть email" required>
-                    {% for er in email %}
-                        <p class="error">{{ er }}</p>
+                    <p class="input_holder">Email користувача:</p>  {% comment %} Подпись к полю{% endcomment %}
+                    <input class="reg_input" type="email" name="email" placeholder="Введіть email" required>  {% comment %} Поле для ввода email{% endcomment %}
+                    {% for er in email %}  {% comment %} Перебираем список ошибок, связанных с email{% endcomment %}
+                        <p class="error">{{ er }}</p>  {% comment %} Выводим каждую ошибку{% endcomment %}
                     {% endfor %}
-                    <p class="input_holder">Пароль користувача:</p>
-                    <input class = "reg_input" type = "password" name = "password" placeholder = "Введіть пароль" required>
-                    <p class="input_holder">Підтвердження паролю:</p>
-                    <input class = "reg_input" type = "password" name = "passwordConfirm" placeholder = "Введіть пароль" required>
-                    {% for er in password %}
-                        <p class="error">{{ er }}</p>
+                    <p class="input_holder">Пароль користувача:</p>  {% comment %} Подпись к полю{% endcomment %}
+                    <input class="reg_input" type="password" name="password" placeholder="Введіть пароль" required>  {% comment %} Поле для ввода пароля{% endcomment %}
+                    <p class="input_holder">Підтвердження паролю:</p>  {% comment %} Подпись к полю подтверждения пароля{% endcomment %}
+                    <input class="reg_input" type="password" name="passwordConfirm" placeholder="Введіть пароль" required>  {% comment %} Поле подтверждения пароля{% endcomment %}
+                    {% for er in password %}  {% comment %} Перебираем список ошибок, связанных с паролем{% endcomment %}
+                        <p class="error">{{ er }}</p>  {% comment %} Выводим каждую ошибку{% endcomment %}
                     {% endfor %}
-                    <p>Якщо у вас вже є аккаунт натисніть <a href="{% url 'login' %}">тут</a>.</p>
-                    <button type = "submit" class = "reg_submit">Зареєструватися</button>
+                    <p>Якщо у вас вже є аккаунт натисніть <a href="{% url 'login' %}">тут</a>.</p>  {% comment %} Ссылка на страницу входа{% endcomment %}
+                    <button type="submit" class="reg_submit">Зареєструватися</button>  {% comment %} Кнопка отправки формы{% endcomment %}
                 </form>
             </div>
         </div>
 
-        <div class="test-2">
-            <img class="image-qr" src="{% static 'registration/images/QRCODE.png' %}" alt="error with qrcode image, line 43">
+        <div class="test-2">  {% comment %} Контейнер для изображения QR-кода{% endcomment %}
+            <img class="image-qr" src="{% static 'registration/images/QRCODE.png' %}" alt="error with qrcode image, line 43">  {% comment %} Подключаем изображение из статических файлов{% endcomment %}
         </div>
-    </div>
-
-
-{% endblock  %}
+    </div>  {% comment %} Закрываем основной контейнер{% endcomment %}
+{% endblock %}
+    
